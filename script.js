@@ -11,7 +11,7 @@ const DomElement = function(){
         let elem;
         if (selector[0] === '#'){
             elem = document.createElement("p");
-            elem.className = selector.substr(1);
+            elem.setAttribute('id',selector.substr(1));
             elem.style.cssText = `height: ${this.height};
                 background-color: ${this.bg};
                 width: ${this.width};
