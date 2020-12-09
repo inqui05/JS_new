@@ -1,32 +1,36 @@
 'use strict';
-let books = document.querySelectorAll('.book'),
-    elements = document.querySelectorAll('li');
+let elementOnPage = document.querySelector('.lesson14');
 
-const newChapter = document.createElement('li'),
-    body = document.querySelector('body'),
-    advertising = document.querySelector('.adv');
+const DomElement = function(){
+    this.selector = 0;
+    this.height = '150px';
+    this.width = '800px';
+    this.bg = 'RGB(249, 201, 16)';
+    this.fontSize = '100px';
+    this.creatElement = function(selector){
+        let elem;
+        if (selector[0] === '#'){
+            elem = document.createElement("p");
+            elem.className = selector.substr(1);
+            elem.style.cssText = `height: ${this.height};
+                background-color: ${this.bg};
+                width: ${this.width};
+                font-size: ${this.fontSize}`;
+            elem.innerHTML = 'Это параграф p!';
+            elementOnPage.after(elem);
+        } else if (selector[0] === '.'){
+            elem = document.createElement("div");
+            elem.className = selector.substr(1);
+            elem.style.cssText = `height: ${this.height};
+                background-color: ${this.bg};
+                width: ${this.width};
+                font-size: ${this.fontSize}`;
+            elem.innerHTML = '<strong>А вот и блок div!</strong>';
+            elementOnPage.after(elem);
+        }
+    };
+};
 
-books[0].before(books[1]);
-books[5].after(books[2]);
-books[4].after(books[3]);
+let domElement = new DomElement();
 
-//меняем фоновую картинку
-document.body.style.backgroundImage = "url('http://127.0.0.1:5500/image/you-dont-know-js.jpg')";
-
-//изменяем название книги
-books[4].innerHTML =  books[4].innerHTML.replace('Книга 3. this и Пропопипы Объектов', 'Книга 3. this и Прототипы Объектов');
-
-//удаляем рекламу
-advertising.remove();
-
-//восставливаем порядок глав
-elements[9].after(elements[2]);
-elements[4].before(elements[8]);
-elements[3].after(elements[6]);
-elements[47].after(elements[55]);
-elements[54].before(elements[51]);
-elements[52].before(elements[48]);
-
-//вставляем дополнительную главу в книгу 6
-newChapter.textContent = 'Глава 8: За пределами ES6';
-elements[25].after(newChapter);
+domElement.creatElement('.lol');
